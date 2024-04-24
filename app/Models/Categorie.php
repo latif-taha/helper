@@ -14,4 +14,11 @@ class Categorie extends Model
     public function services() {
         return $this->hasMany(Service::class);
     }
+
+
+    public function partenaires() {
+        return $this->hasMany(User::class);
+    }
+
+
 }

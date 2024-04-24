@@ -24,6 +24,9 @@ class Service extends Model
     }
 
     public function partenaires() {
-        return $this->belongsTo(User::class, 'user_id_partenaire');
+        return $this->belongsTo(User::class);
     }
+
+
+
 }

@@ -101,7 +101,9 @@
           <div class="col-lg-5 quote-bg" style="background-image: url(assets/img/quote-bg.jpg);"></div>
 
           <div class="col-lg-7">
-            <form action="forms/quote.php" method="post" class="php-email-form">
+            <form action="/con" method="POST" class="php-email-form">
+              @method('post')
+              @csrf
               <h3>Login</h3>
               <div class="row gy-4">
 
@@ -114,18 +116,18 @@
                
 
                 <div class="col-md-12 ">
-                  <input type="email" class="form-control" name="email" placeholder="Email" required>
+                  <input type="email" class="form-control" name="email" placeholder="Email" value="{{old('email')}}" required>
                 </div>
 
                 <div class="col-md-12">
-                  <input type="text" class="form-control" name="phone" placeholder="Phone" required>
+                  <input type="text" class="form-control" name="password" placeholder="Password" required>
                 </div>
 
 
 
                 <div class="col-md-12 text-center">
 
-                  <button type="submit">login</button>
+                  <button type="submit" name="btn-sbt">login</button>
 
 
                  <!-- <li><a href="register.html">Home</a></li>  -->
@@ -226,7 +228,7 @@
   <script src="{{ asset('accueil/Helper/assets/vendor/glightbox/js/glightbox.min.js') }}"></script>
   <script src="{{ asset('accueil/Helper/assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
   <script src="{{ asset('accueil/Helper/assets/vendor/aos/aos.js') }}"></script>
-  <script src="{{ asset('accueil/Helper/assets/vendor/php-email-form/validate.js') }}"></script>
+ <!-- <script src="{{ asset('accueil/Helper/assets/vendor/php-email-form/validate.js') }}"></script> -->
 
   <!-- Template Main JS File -->
   <script src="{{ asset('accueil/Helper/assets/js/main.js') }}"></script>

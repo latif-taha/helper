@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Demande extends Model
 {
     use HasFactory;
+
     protected $fillable = ['service_id', 'user_id_client', 'user_id_partenaire', 'statut'];
 
     public function service() {
@@ -21,4 +22,6 @@ class Demande extends Model
     public function partenaire() {
         return $this->belongsTo(User::class, 'user_id_partenaire');
     }
+
+
 }

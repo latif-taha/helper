@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Tarif extends Model
 {
     use HasFactory;
+
     protected $fillable = ['intervention_id', 'user_id_partenaire', 'user_id_client', 'comment', 'date'];
 
     public function intervention() {
@@ -21,4 +22,6 @@ class Tarif extends Model
     public function client() {
         return $this->belongsTo(User::class, 'user_id_client');
     }
+
+
 }

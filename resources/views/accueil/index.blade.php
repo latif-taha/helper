@@ -38,7 +38,9 @@
   ======================================================== -->
 </head>
 
+
 <body>
+ @include('partials.navbar')
 
   <!-- ======= Header ======= -->
   <header id="header" class="header d-flex align-items-center fixed-top">

@@ -74,7 +74,8 @@
     <title>Register</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
-
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <!-- Favicons -->
     <link href="{{ asset('accueil/Helper/assets/img/favicon.png') }}" rel="icon">
   <link href="{{ asset('accueil/Helper/assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
@@ -178,9 +179,20 @@
                 <div class="col-lg-7">
 
 
-                    <form action="forms/register.php" method="post" class="php-email-form active" id="client-form" >
+                    <form action="/registerclient" method="POST" class="php-email-form active" id="client-form" >
+                        @csrf
                     <h3>Client</h3>
                         <p>Join our community and start offering or receiving top-notch home services. Connect with professionals and homeowners alike.</p>
+ @if ($errors->any())
+    
+    <ul>
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+
+@endif
+
                         <div class="row gy-4">
 
                             <div class="col-lg-12">
@@ -188,19 +200,19 @@
                             </div>
 
                             <div class="col-md-6">
-                                <input type="text" name="firstname" class="form-control" placeholder="First Name" required>
+                                <input type="text" name="firstname" class="form-control" placeholder="First Name" value="{{old('firstname')}}" required>
                             </div>
 
                             <div class="col-md-6">
-                                <input type="text" name="lastname" class="form-control" placeholder="Last Name" required>
+                                <input type="text" name="lastname" class="form-control" placeholder="Last Name" value="{{old('lastname')}}" required>
                             </div>
 
                             <div class="col-md-12">
-                                <input type="email" class="form-control" name="email" placeholder="Email" required>
+                                <input type="email" class="form-control" name="email" placeholder="Email"  value="{{old('email')}}" required>
                             </div>
 
                             <div class="col-md-12">
-                                <input type="tel" class="form-control" name="tel" placeholder="Phone number" required>
+                                <input type="tel" class="form-control" name="tel" placeholder="Phone number"  value="{{old('tel')}}" required>
                             </div>
 
 
@@ -214,64 +226,87 @@
 
                             <div class="col-md-12 text-center">
                                 <div class="loading">Loading</div>
-                                <div class="error-message"></div>
-                                <div class="sent-message">Your registration has been submitted successfully. Thank you!</div>
+                             <div class="error-message"></div> 
+                            
+                                <div class="sent-message">   dhfze dzd cdggds sdtfstd sdsihds </div> 
+                           
+
+                           
 
                                 <button type="submit">Register</button>
                             </div>
 
                         </div>
                     </form>
-                    <form action="forms/register.php" method="post" class="php-email-form " id="expert-form" >
-                        <h3>Expert</h3>
-                        <p>Join our community and start offering or receiving top-notch home services. Connect with professionals and homeowners alike.</p>
-                        <div class="row gy-4">
-
-                            <div class="col-lg-12">
-                                <h4>Your Account Details</h4>
-                            </div>
-
-                            <div class="col-md-6">
-                                <input type="text" name="firstname" class="form-control" placeholder="First Name" required>
-                            </div>
-
-                            <div class="col-md-6">
-                                <input type="text" name="lastname" class="form-control" placeholder="Last Name" required>
-                            </div>
-
-                            <div class="col-md-12">
-                                <input type="email" class="form-control" name="email" placeholder="Email" required>
-                            </div>
-
-                            
-                            <div class="col-md-12">
-                                <input type="tel" class="form-control" name="tel" placeholder="Phone number" required>
-                            </div>
-
-                            <div class="col-md-12">
-                                <input type="text" class="form-control" name="adresse" placeholder="Adress" required>
-                            </div>
-
-                            <div class="col-md-12">
-                                <input type="password" class="form-control" name="password" placeholder="Password" required>
-                            </div>
-
-                            
 
 
+        <form action="/registerpartenaire" method="POST" class="php-email-form" id="expert-form">
+         
+        @csrf
+    <h3>Expert Registration</h3>
 
+    @if ($errors->any())
+    
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    
+@endif
+    <div class="row gy-4">
+        <div class="col-lg-12">
+            <h4>Your Account Details</h4>
+        </div>
 
+        <div class="col-md-6">
+            <input type="text" name="firstname" class="form-control" placeholder="First Name" value="{{old('firstname')}}" required>
+        </div>
 
-                            <div class="col-md-12 text-center">
-                                <div class="loading">Loading</div>
-                                <div class="error-message"></div>
-                                <div class="sent-message">Your registration has been submitted successfully. Thank you!</div>
+        <div class="col-md-6">
+            <input type="text" name="lastname" class="form-control" placeholder="Last Name" value="{{old('lastname')}}" required>
+        </div>
 
-                                <button type="submit">Register</button>
-                            </div>
+        <div class="col-md-12">
+            <input type="email" class="form-control" name="email" placeholder="Email" value="{{old('email')}}" required>
+        </div>
 
-                        </div>
-                    </form>
+        <div class="col-md-12">
+            <input type="tel" class="form-control" name="tel" placeholder="Phone number" value="{{old('tel')}}" required>
+        </div>
+
+        <div class="col-md-12">
+            <input type="text" class="form-control" name="adresse" placeholder="Address"  value="{{old('adresse')}}" required>
+        </div>
+
+        <div class="col-md-12">
+            <input type="text" class="form-control" name="ville" placeholder="City" value="{{old('ville')}}" required>
+        </div>
+
+        <div class="col-md-12">
+            <select name="categorie" value="{{old('categorie')}}" class="form-control" id="categorie-select" required onchange="updateServices()">
+            <option value="" disabled>Select a Category</option>
+    <option value="1">Bricolage</option>
+    <option value="2">Jardinage</option>
+    <option value="3">Livraison</option>
+            </select>
+        </div>
+
+        <div class="col-md-12">
+    <label>Select your services (up to 3):</label>
+    <div id="services-checkboxes">
+        <!-- Les cases à cocher des services seront ajoutées ici par JavaScript -->
+    </div>
+</div>
+        <div class="col-md-12">
+            <input type="password" class="form-control" name="password" placeholder="Password" required>
+        </div>
+
+        <div class="col-md-12 text-center">
+            <button type="submit">Register</button>
+        </div>
+    </div>
+</form>
                 </div><!-- End Registration Form -->
 
             </div>
@@ -303,6 +338,50 @@
         }
     </script>
 
+<script>
+document.getElementById('categorie-select').addEventListener('change', function() {
+    var category = this.value;
+    var servicesContainer = document.getElementById('services-checkboxes');
+    servicesContainer.innerHTML = ''; // Clear existing checkboxes
+
+    // Simulated service options based on category
+    var servicesOptions = {
+        '1': ['Installation de meubles', 'Petite plomberie', 'Électricité de base', 'Peinture et décoration'],
+        '2': ['Entretien de pelouse', 'Plantation', 'Taille des haies', 'Création de potager'],
+        '3': ['Livraison de courses', 'Livraison de repas', 'Livraison express de documents', 'Transport de petits meubles']
+    };
+
+    if (servicesOptions[category]) {
+        servicesOptions[category].forEach(function(service) {
+            var checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.id = service;
+            checkbox.name = 'services[]';
+            checkbox.value = service;
+
+            var label = document.createElement('label');
+            label.htmlFor = service;
+            label.appendChild(document.createTextNode(service));
+
+            var div = document.createElement('div');
+            div.appendChild(checkbox);
+            div.appendChild(label);
+
+            servicesContainer.appendChild(div);
+        });
+    }
+
+    // Limit checkbox checks
+    $('#services-checkboxes').on('change', 'input[type="checkbox"]', function() {
+        var maxAllowed = 3;
+        var countCheckedCheckboxes = $('#services-checkboxes input[type="checkbox"]:checked').length;
+        if (countCheckedCheckboxes > maxAllowed) {
+            this.checked = false;
+            alert('You can select up to ' + maxAllowed + ' services only.');
+        }
+    });
+});
+</script>
     <!-- End Get a Quote Section -->
 
 </main><!-- End #main -->

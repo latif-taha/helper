@@ -44,5 +44,12 @@ public function aboutpage(){
     return view('accueil.about');
 }
 
+// La fonction ajouter
+
+public function adminpage(){
+
+    return view('admin.dashboard');
+}
+
 
 }
