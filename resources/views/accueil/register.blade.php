@@ -184,7 +184,7 @@
                     <h3>Client</h3>
                         <p>Join our community and start offering or receiving top-notch home services. Connect with professionals and homeowners alike.</p>
  @if ($errors->any())
-    
+
     <ul>
         @foreach ($errors->all() as $error)
             <li>{{ $error }}</li>
@@ -226,12 +226,12 @@
 
                             <div class="col-md-12 text-center">
                                 <div class="loading">Loading</div>
-                             <div class="error-message"></div> 
-                            
-                                <div class="sent-message">   dhfze dzd cdggds sdtfstd sdsihds </div> 
-                           
+                             <div class="error-message"></div>
 
-                           
+                                <div class="sent-message">   dhfze dzd cdggds sdtfstd sdsihds </div>
+
+
+
 
                                 <button type="submit">Register</button>
                             </div>
@@ -241,18 +241,18 @@
 
 
         <form action="/registerpartenaire" method="POST" class="php-email-form" id="expert-form">
-         
+
         @csrf
     <h3>Expert Registration</h3>
 
     @if ($errors->any())
-    
+
         <ul>
             @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>
             @endforeach
         </ul>
-    
+
 @endif
     <div class="row gy-4">
         <div class="col-lg-12">
@@ -260,11 +260,11 @@
         </div>
 
         <div class="col-md-6">
-            <input type="text" name="firstname" class="form-control" placeholder="First Name" value="{{old('firstname')}}" required>
+            <input type="text" name="nom" class="form-control" placeholder="First Name" value="{{old('nom')}}" required>
         </div>
 
         <div class="col-md-6">
-            <input type="text" name="lastname" class="form-control" placeholder="Last Name" value="{{old('lastname')}}" required>
+            <input type="text" name="prenom" class="form-control" placeholder="Last Name" value="{{old('prenom')}}" required>
         </div>
 
         <div class="col-md-12">
@@ -272,7 +272,7 @@
         </div>
 
         <div class="col-md-12">
-            <input type="tel" class="form-control" name="tel" placeholder="Phone number" value="{{old('tel')}}" required>
+            <input type="tel" class="form-control" name="telephone" placeholder="Phone number" value="{{old('telephone')}}" required>
         </div>
 
         <div class="col-md-12">
@@ -284,8 +284,8 @@
         </div>
 
         <div class="col-md-12">
-            <select name="categorie" value="{{old('categorie')}}" class="form-control" id="categorie-select" required onchange="updateServices()">
-            <option value="" disabled>Select a Category</option>
+            <select name="categorie_id" class="form-control"  required >
+    <option value="" disabled >Select a Category</option>
     <option value="1">Bricolage</option>
     <option value="2">Jardinage</option>
     <option value="3">Livraison</option>
@@ -293,11 +293,9 @@
         </div>
 
         <div class="col-md-12">
-    <label>Select your services (up to 3):</label>
-    <div id="services-checkboxes">
-        <!-- Les cases à cocher des services seront ajoutées ici par JavaScript -->
+
+
     </div>
-</div>
         <div class="col-md-12">
             <input type="password" class="form-control" name="password" placeholder="Password" required>
         </div>
@@ -312,7 +310,7 @@
             </div>
 
         </div>
-    </section><!-- End Registration Section -->
+    </section>          <!-- End Registration Section -->
     <!-- End Helper Registration Section -->
 
     <!-- ... Existing HTML and scripts ... -->
@@ -338,50 +336,7 @@
         }
     </script>
 
-<script>
-document.getElementById('categorie-select').addEventListener('change', function() {
-    var category = this.value;
-    var servicesContainer = document.getElementById('services-checkboxes');
-    servicesContainer.innerHTML = ''; // Clear existing checkboxes
 
-    // Simulated service options based on category
-    var servicesOptions = {
-        '1': ['Installation de meubles', 'Petite plomberie', 'Électricité de base', 'Peinture et décoration'],
-        '2': ['Entretien de pelouse', 'Plantation', 'Taille des haies', 'Création de potager'],
-        '3': ['Livraison de courses', 'Livraison de repas', 'Livraison express de documents', 'Transport de petits meubles']
-    };
-
-    if (servicesOptions[category]) {
-        servicesOptions[category].forEach(function(service) {
-            var checkbox = document.createElement('input');
-            checkbox.type = 'checkbox';
-            checkbox.id = service;
-            checkbox.name = 'services[]';
-            checkbox.value = service;
-
-            var label = document.createElement('label');
-            label.htmlFor = service;
-            label.appendChild(document.createTextNode(service));
-
-            var div = document.createElement('div');
-            div.appendChild(checkbox);
-            div.appendChild(label);
-
-            servicesContainer.appendChild(div);
-        });
-    }
-
-    // Limit checkbox checks
-    $('#services-checkboxes').on('change', 'input[type="checkbox"]', function() {
-        var maxAllowed = 3;
-        var countCheckedCheckboxes = $('#services-checkboxes input[type="checkbox"]:checked').length;
-        if (countCheckedCheckboxes > maxAllowed) {
-            this.checked = false;
-            alert('You can select up to ' + maxAllowed + ' services only.');
-        }
-    });
-});
-</script>
     <!-- End Get a Quote Section -->
 
 </main><!-- End #main -->
@@ -467,7 +422,7 @@ document.getElementById('categorie-select').addEventListener('change', function(
   <script src="{{ asset('accueil/Helper/assets/vendor/glightbox/js/glightbox.min.js') }}"></script>
   <script src="{{ asset('accueil/Helper/assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
   <script src="{{ asset('accueil/Helper/assets/vendor/aos/aos.js') }}"></script>
-  <script src="{{ asset('accueil/Helper/assets/vendor/php-email-form/validate.js') }}"></script>
+<!--  <script src="{{ asset('accueil/Helper/assets/vendor/php-email-form/validate.js') }}"></script> -->
 
   <!-- Template Main JS File -->
   <script src="{{ asset('accueil/Helper/assets/js/main.js') }}"></script>

@@ -34,76 +34,59 @@ class UsersController extends Controller
         ]);
 
         if ($user->role === 'admin') {
-             return redirect('/dash'); 
+             return redirect('/dash');
         }
         elseif($user->role === 'expert'){
-            return redirect('/dash'); 
+            return redirect('/dash');
         }
         elseif($user->role === 'client'){
-            return redirect('/dash'); 
+            return redirect('/dash');
         }
          else {
              return redirect()->back()->with('failure', 'Email ou mot de passe incorrect');
         }
 
 
-    } 
+    }
 }
 
 
 
     public function registerExpert(Request $request)
 {
-    // Validez les données du formulaire
-    $validatedData = $request->validate([
-        'firstname' => 'required|string|max:255',
-        'lastname' => 'required|string|max:255',
-        'email' => 'required|email|unique:users',
-        'tel' => 'required',
+     // Valider les données du formulaire
+     $validatedData = $request->validate([
+        'nom' => 'required|string|max:255',
+        'prenom' => 'required|string|max:255',
+        'email' => 'required|email|unique:users|max:255',
+        'telephone' => 'required|string|max:255',
         'adresse' => 'required|string|max:255',
         'ville' => 'required|string|max:255',
-        'password' => 'required|min:4',
-        'categorie' => 'required|exists:categories,id',
-     
+        'categorie_id' => 'required|exists:categories,id',
+        'password' => 'required|string|min:4',
     ]);
 
-
-    //$user = User::create($validatedData);
-    // Créez un nouvel utilisateur
-    
-    $user = new User([
-        'nom' => $validatedData['lastname'],
-        'prenom' => $validatedData['firstname'],
-        'email' => $validatedData['email'],
-        'telephone' => $validatedData['tel'],
-        'adresse' => $validatedData['adresse'],
-        'ville' => $validatedData['ville'],
-        'password' => bcrypt($validatedData['password']),
-        'categorie_id' => $validatedData['categorie'], 
-        'role' => 'expert',
-    ]);   
+    // Créer un nouvel objet User avec les données validées
+    $user = new User();
+    $user->nom = $validatedData['nom'];
+    $user->prenom = $validatedData['prenom'];
+    $user->email = $validatedData['email'];
+    $user->telephone = $validatedData['telephone'];
+    $user->adresse = $validatedData['adresse'];
+    $user->ville = $validatedData['ville'];
+    $user->categorie_id = $validatedData['categorie_id'];
+    $user->password = bcrypt($validatedData['password']); // Assurez-vous d'ajouter le mot de passe de manière sécurisée
+    $user->role ='expert';
+    // Enregistrer l'utilisateur dans la base de données
+    // $user->save();
 
     // Enregistrez l'utilisateur dans la base de données
-    $user->save();
-
-// Récupérez les valeurs des services sélectionnés depuis le formulaire
-$selectedServices = $request->input('services');
-
-// Parcourez les valeurs sélectionnées et enregistrez-les dans la base de données
-foreach ($selectedServices as $selectedService) {
-    // Créez un nouvel objet Service avec les données nécessaires
-    $service = new Service([
-        'nom' => $selectedService, // Nom du service
-        'user_id' => $user->id, // ID de l'utilisateur
-        'categorie_id' => $validatedData['categorie'], // ID de la catégorie
-        // Ajoutez d'autres champs si nécessaire
-    ]);
-
-    // Enregistrez le service dans la base de données
-    $service->save();
+if ($user->save()) {
+    return redirect()->back()->with('success', 'Your registration has been submitted successfully. Thank you!');
+} else {
+    return redirect()->back()->with('failure', 'Your registration hasn\'t been submitted successfully. Thank you!');
 }
-    // Redirigez l'utilisateur vers une autre page après l'enregistrement
-    return redirect('/register')->with('success', 'Expert registered successfully!');
+
 
 }
 
@@ -117,7 +100,7 @@ public function registerClient(Request $request){
         'lastname' => 'required',
         'email' => 'required|email|unique:users',
         'tel' => 'required',
-        'password' => 'required|min:5', 
+        'password' => 'required|min:5',
     ]);
 
     // Créez un nouvel utilisateur avec les données validées
@@ -128,12 +111,12 @@ public function registerClient(Request $request){
         'telephone' => $validatedData['tel'],
         'password' => bcrypt($validatedData['password']),
         'role' => 'client',
-    ]); 
+    ]);
 
     // Enregistrez l'utilisateur dans la base de données
     $user->save();
     return redirect('/register')->with('success', 'Your registration has been submitted successfully. Thank you!');
-    
+
 }
 
 
