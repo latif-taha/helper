@@ -257,99 +257,110 @@
 		<!--**********************************
             Content body start
         ***********************************-->
-        <div class="content-body">
-            <div class="container-fluid">
+		<div class="content-body">
+			<div class="container-fluid">
 				<div class="row page-titles">
 					<ol class="breadcrumb">
-						<li class="breadcrumb-item active"><a href="javascript:void(0)">EXPERT</a></li>
+						<li class="breadcrumb-item active"><a href="javascript:void(0)">Expert</a></li>
 						<li class="breadcrumb-item"><a href="javascript:void(0)">Settings</a></li>
 					</ol>
-                </div>
-                <!-- row -->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="form-validation">
-									<form class="needs-validation" novalidate="">
+				</div>
+				
+				@if (session()->has('success'))
+				<!-- Success Message -->
+				<div class="succes">
+					<div class="alert alert-success alert-dismissible fade show" role="alert">
+						<p class="err"><i class="fa-solid fa-circle-check"></i>{{ session('success') }}</p>
+					</div>
+				</div>
+				<script>
+					// Hide the success message after 5 seconds
+					setTimeout(function() {
+						$('.alert').alert('close');
+					}, 5000);
+				</script>
+				@endif
+			
+
+				<!-- row -->
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="card">
+							<div class="card-body">
+								<div class="form-validation">
+									<form action="/updateexpert" method="post" class="needs-validation" novalidate>
+										@csrf
 										<div class="row">
 											<!-- Left Side with Profile Picture -->
 											<div class="col-xl-6">
 												<div class="col-xl-12 text-center mb-4">
 													<div class="profile-photo">
-														<img src="{{ asset('client/images/profile/profile.png')}}" class="img-fluid rounded-circle" alt="">
+														<img src="{{ asset('client/images/profile/user-2.png')}}" class="img-fluid rounded-circle" alt="">
 													</div>
 													<div class="mt-3">
-														<label for="profileImage" class="btn btn-outline-primary btn-rounded px-5">
-															MODIFY
+														<label for="profileImage" class="btn btn-outline-primary btn-rounded px-5">Modifier
 															<input type="file" id="profileImage" class="d-none" accept="image/*" onchange="updateProfilePicture(this)">
 														</label>
 													</div>
 												</div>
 											</div>
-
 											<!-- Right Side with Form Fields -->
 											<div class="col-xl-6">
 												<div class="col-xl-12">
+													<!-- nom Field -->
 													<div class="mb-3 row">
-														<label class="col-lg-4 col-form-label" for="validationCustom07">Name
-															<span class="text-danger">*</span>
-														</label>
+														<label class="col-lg-4 col-form-label" for="nom">Name <span class="text-danger">*</span></label>
 														<div class="col-lg-6">
-															<input type="text" class="form-control" id="validationCustom07" required="">
+															<input type="text" class="form-control" id="nom" name="nom" value="{{ auth()->user()->nom }}" required>
 															<div class="invalid-feedback">
 																Please enter your name.
 															</div>
 														</div>
 													</div>
+													<!-- First Name Field -->
 													<div class="mb-3 row">
-														<label class="col-lg-4 col-form-label" for="validationCustom07">First name
-															<span class="text-danger">*</span>
-														</label>
+														<label class="col-lg-4 col-form-label" for="prenom">First name <span class="text-danger">*</span></label>
 														<div class="col-lg-6">
-															<input type="text" class="form-control" id="validationCustom07"  required="">
+															<input type="text" class="form-control" id="prenom" name="prenom" value="{{ auth()->user()->prenom }}" required>
 															<div class="invalid-feedback">
-																Please enter First name.
+																Please enter your first name.
 															</div>
 														</div>
 													</div>
+													<!-- adresse Field -->
 													<div class="mb-3 row">
-														<label class="col-lg-4 col-form-label" for="validationCustom07"> CITY
-															<span class="text-danger">*</span>
-														</label>
+														<label class="col-lg-4 col-form-label" for="adresse">adresse <span class="text-danger">*</span></label>
 														<div class="col-lg-6">
-															<input type="text" class="form-control" id="validationCustom07"  required="">
+															<input type="text" class="form-control" id="adresse" name="adresse" value="{{ auth()->user()->adresse }}" required>
 															<div class="invalid-feedback">
-																Please enter your Localisation.
+																Please enter your adresse.
 															</div>
 														</div>
 													</div>
+													<!-- Phone Number Field -->
 													<div class="mb-3 row">
-														<label class="col-lg-4 col-form-label" for="validationCustom07">Phone number
-															<span class="text-danger">*</span>
-														</label>
+														<label class="col-lg-4 col-form-label" for="telephone">Phone number <span class="text-danger">*</span></label>
 														<div class="col-lg-6">
-															<input type="text" class="form-control" id="validationCustom07" placeholder="06 12 34 56 78" required="">
+															<input type="text" class="form-control" id="telephone" name="telephone" value="{{ auth()->user()->telephone }}" placeholder="06 12 34 56 78" required>
 															<div class="invalid-feedback">
-																Please enter your Phone number.
+																Please enter your phone number.
 															</div>
 														</div>
 													</div>
+													<!-- Email Field -->
 													<div class="mb-3 row">
-														<label class="col-lg-4 col-form-label" for="validationCustom07">Email
-															<span class="text-danger">*</span>
-														</label>
+														<label class="col-lg-4 col-form-label" for="email">Email <span class="text-danger">*</span></label>
 														<div class="col-lg-6">
-															<input type="text" class="form-control" id="validationCustom07" placeholder="exemple@email.com" required="">
+															<input type="email" class="form-control" id="email" name="email" value="{{ auth()->user()->email }}" placeholder="example@email.com" required>
 															<div class="invalid-feedback">
-																Please enter your email.
+																Please enter a valid email address.
 															</div>
 														</div>
 													</div>
 												</div>
 											</div>
 										</div>
-
+		
 										<!-- Submit Button Row -->
 										<div class="row mt-4">
 											<div class="col-12 text-center">
@@ -357,65 +368,66 @@
 											</div>
 										</div>
 									</form>
-
-
-                                </div>
-                            </div>
-
-
-                        </div>
-                    </div>
-
-                    <div class="col-lg-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Vertical Forms with icon</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="basic-form">
-                                    <form class="form-valide-with-icon needs-validation" novalidate="">
-                                        <div class="mb-3">
-                                            <label class="text-label form-label" for="validationCustomUsername">Username</label>
-                                            <div class="input-group">
-												<span class="input-group-text"> <i class="fa fa-user"></i> </span>
-                                                <input type="text" class="form-control" id="validationCustomUsername" placeholder="Enter a username.." required="">
-												<div class="invalid-feedback">
-													Please Enter a username.
-												  </div>
-                                            </div>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="text-label form-label" for="dlab-password">Password *</label>
-                                            <div class="input-group transparent-append">
+								</div>
+							</div>
+						</div>
+					</div>
+		
+					<div class="col-lg-12">
+						<div class="card">
+							<div class="card-header">
+								<h4 class="card-title">update password</h4>
+							</div>
+							<div class="card-body">
+								<div class="basic-form">
+									<form action="/updateLogin" method="post" class="form-valide-with-icon needs-validation">
+										@csrf
+										<div class="mb-3">
+											<label class="text-label form-label" for="password">Password *</label>
+											<div class="input-group transparent-append">
 												<span class="input-group-text"> <i class="fa fa-lock"></i> </span>
-                                                <input type="password" class="form-control" id="dlab-password" placeholder="Choose a safe one.." required="">
-												<span class="input-group-text show-pass">
+												<input type="password" class="form-control" id="password" name="password" placeholder="Choose a safe one.." required>
+												<span class="input-group-text show-pass"> 
 													<i class="fa fa-eye-slash"></i>
 													<i class="fa fa-eye"></i>
 												</span>
-                                                <div class="invalid-feedback">
-													Please Enter a username.
+												<div class="invalid-feedback">
+													Please enter a password.
 												</div>
-                                            </div>
-                                        </div>
-                                        <div class="mb-3">
-                                            <div class="form-check">
-											  <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required="">
-											  <label class="form-check-label" for="invalidCheck2">
-												Check Me out
-											  </label>
 											</div>
-                                        </div>
-                                        <button type="submit" class="btn me-2 btn-primary">Submit</button>
-                                        <button type="submit" class="btn btn-light">cencel</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+										</div>
+										<div class="mb-3">
+											<label class="text-label form-label" for="password_confirmation">Repeat Password *</label>
+											<div class="input-group transparent-append">
+												<span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+												<input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Repeat your password.." required>
+												<span class="input-group-text show-pass"> 
+													<i class="fa fa-eye-slash"></i>
+													<i class="fa fa-eye"></i>
+												</span>
+												<div class="invalid-feedback">
+													Repeat your password.
+												</div>
+											</div>
+										</div>
+										<div class="mb-3">
+											<div class="form-check">
+												<input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
+												<label class="form-check-label" for="invalidCheck2">
+													Check me out
+												</label>
+											</div>
+										</div>
+										<button type="submit" class="btn me-2 btn-primary">Submit</button>
+										<button type="button" class="btn btn-light">Cancel</button>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
         <!--**********************************
             Content body end
         ***********************************-->

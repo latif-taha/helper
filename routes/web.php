@@ -5,6 +5,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\AccueilController;
+use App\Http\Controllers\PartenaireController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,7 @@ Route::get('/dashboard', function () {
 Route::get('/empty-page', function () {
     return view('expert.empty-page');
 });
+
 Route::get('/empty-page1', function () {
     return view('expert.empty-page1');
 });
@@ -83,3 +85,4 @@ Route::get('/dash' , [AccueilController::class, 'adminpage']);
 Route::post('/registerpartenaire' , [UsersController::class, 'registerExpert']);
 Route::post('/registerclient' , [UsersController::class, 'registerClient']);
 Route::post('/con' , [UsersController::class, 'login'])->name('connexion');
+Route::post('/updateexpert' , [PartenaireController::class, 'updateexpert']);
