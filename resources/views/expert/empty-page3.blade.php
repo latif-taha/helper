@@ -24,6 +24,8 @@
 
 	<!-- Style css -->
     <link href="{{ asset('expert/css/style.css')}}" rel="stylesheet">
+
+
 </head>
 <body>
 
@@ -258,10 +260,74 @@
             Content body start
         ***********************************-->
         <div class="content-body">
+        <div class="container-fluid">
+        <div class="row page-titles">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item active"><a href="javascript:void(0)">EXPERT</a></li>
+						<li class="breadcrumb-item"><a href="javascript:void(0)">Demandes</a></li>
+					</ol>
+                </div>
             <!-- row -->
-			<div class="container-fluid">
+            <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                        <div class="card-header">
+                                <h2 class="breadcrumb-item active"><a href="javascript:void(0)">DEMANDES LISTE</a></h2>
+                            </div>
+
+    @if (!$demandes->isEmpty())
+    <table class="table table-striped table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Service id</th>
+                <th>ID Client</th>
+                <th>ID Expert</th>
+                <th>Created at </th>
+                <th>Updated at</th>
+                <th>Statut</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($demandes as $demande)
+                <tr>
+                    <td>{{ $demande->id }}</td>
+                    <td>{{ $demande->service_id }}</td>
+                    <td>{{ $demande->user_id_client }}</td>
+                    <td>{{ $demande->user_id_partenaire }}</td>
+                    <td>{{ $demande->created_at->format('d/m/Y H:i') }}</td>
+                    <td>{{ $demande->updated_at->format('d/m/Y H:i') }}</td>
+                    <td>
+                        <span class="badge {{ $demande->statut == 'acceptée' ? 'bg-success' : ($demande->statut == 'refusée' ? 'bg-danger' : 'bg-secondary') }}">
+                            {{ $demande->statut }}
+                        </span>
+                    </td>
+                    <td>
+                        <form action="{{ route('demandes.update', $demande->id) }}" method="POST">
+                            @csrf
+                            @method('PUT')
+                            <select class="form-select form-select-sm" name="statut" onchange="this.form.submit()">
+                                <option value="">Change Status</option>
+                                <option value="acceptée" {{ $demande->statut == 'acceptée' ? 'selected' : '' }}>Accepter</option>
+                                <option value="refusée" {{ $demande->statut == 'refusée' ? 'selected' : '' }}>Refuser</option>
+                            </select>
+                        </form>
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+@else
+    <p>Aucune demande trouvée.</p>
+@endif
+
+
 
             </div>
+        </div>
+        </div>
+        </div>
         </div>
         <!--**********************************
             Content body end

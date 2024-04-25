@@ -89,6 +89,7 @@
 							<div class="dashboard_bar">
                                 Dashboard
                             </div>
+
                         </div>
                         <ul class="navbar-nav header-right">
 							<li class="nav-item d-flex align-items-center">
@@ -230,10 +231,10 @@
         <span class="nav-text">SCHUDEL</span>
     </a>
 </li>
-<li><a class="has-arrow " href="{{ url('/empty-page3') }}" aria-expanded="false">
-        <i class="fas fa-clone"></i>
-        <span class="nav-text">RESERVATIONS</span>
-    </a>
+<li><a class="has-arrow " href="{{ url('/expert/empty-page3') }}" aria-expanded="false">
+    <i class="fas fa-clone"></i>
+    <span class="nav-text">RESERVATIONS</span>
+</a>
 </li>
 <li><a class="has-arrow " href="{{ url('/empty-page4') }}" aria-expanded="false">
         <i class="fas fa-chart-line"></i>
@@ -259,6 +260,11 @@
             Content body start
         ***********************************-->
         <div class="content-body">
+            <!-- Zone de message de bienvenue -->
+<div class="welcome-message">
+    <h1>Welcome, {{ Auth::user()->prenom }} (User ID: {{ Auth::user()->id }})</h1>
+</div>
+
             <!-- row -->
 			<div class="container-fluid">
 				<div class="row">

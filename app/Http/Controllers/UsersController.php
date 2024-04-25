@@ -37,7 +37,7 @@ class UsersController extends Controller
              return redirect('/dash');
         }
         elseif($user->role === 'expert'){
-            return redirect('/dash');
+            return redirect('/dashboard');
         }
         elseif($user->role === 'client'){
             return redirect('/dash');

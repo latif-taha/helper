@@ -5,7 +5,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\AccueilController;
-
+use App\Http\Controllers\DemandeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,6 +27,9 @@ Route::get('/expert', function () {
 Route::get('/dashboard', function () {
     return view('expert.dashboard');
 });
+Route::get('/dashboard1', function () {
+    return view('client.dashboard');
+});
 Route::get('/empty-page', function () {
     return view('expert.empty-page');
 });
@@ -36,9 +39,9 @@ Route::get('/empty-page1', function () {
 Route::get('/empty-page2', function () {
     return view('expert.empty-page2');
 });
-Route::get('/empty-page3', function () {
-    return view('expert.empty-page3');
-});
+//Route::get('/empty-page3', function () {
+ //   return view('expert.empty-page3');
+//});
 Route::get('/empty-page4', function () {
     return view('expert.empty-page4');
 });
@@ -76,8 +79,9 @@ Route::get('/home', function () {
 
 Route::get('/dash' , [AccueilController::class, 'adminpage']);
 
-
-
+Route::get('/expert/empty-page3', [DemandeController::class, 'showEmptyPage3'])->middleware('auth');
+// Ajout de la route pour la mise à jour des demandes
+Route::put('/demandes/{demande}', [DemandeController::class, 'update'])->name('demandes.update');
 
 
 Route::post('/registerpartenaire' , [UsersController::class, 'registerExpert']);
