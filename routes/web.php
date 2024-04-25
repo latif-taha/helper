@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\AccueilController;
 use App\Http\Controllers\DemandeController;
+use App\Http\Controllers\PartenaireController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,6 +35,7 @@ Route::get('/dashboard1', function () {
 Route::get('/empty-page', function () {
     return view('expert.empty-page');
 });
+
 Route::get('/empty-page1', function () {
     return view('expert.empty-page1');
 });
@@ -87,3 +90,4 @@ Route::put('/demandes/{demande}', [DemandeController::class, 'update'])->name('d
 Route::post('/registerpartenaire' , [UsersController::class, 'registerExpert']);
 Route::post('/registerclient' , [UsersController::class, 'registerClient']);
 Route::post('/con' , [UsersController::class, 'login'])->name('connexion');
+Route::post('/updateexpert' , [PartenaireController::class, 'updateexpert']);

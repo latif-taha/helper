@@ -1,7 +1,7 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
+	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="keywords" content="">
 	<meta name="author" content="">
@@ -14,7 +14,7 @@
 	<meta name="format-detection" content="telephone=no">
 
 	<!-- PAGE TITLE HERE -->
-	<title>PROFILE</title>
+	<title>Admin Dashboard</title>
 
 	<!-- FAVICONS ICON -->
 	<link rel="shortcut icon" type="image/png" href="{{ asset('expert/images/favicon.png')}}">
@@ -24,7 +24,6 @@
 
 	<!-- Style css -->
     <link href="{{ asset('expert/css/style.css')}}" rel="stylesheet">
-
 </head>
 <body>
 
@@ -87,7 +86,7 @@
 				<div class="collapse navbar-collapse justify-content-between">
 					<div class="header-left">
 						<div class="dashboard_bar">
-							PROFILE
+							PRROFIT
 						</div>
 					</div>
 					<ul class="navbar-nav header-right">
@@ -202,13 +201,14 @@
 	<div class="dlabnav">
 		<div class="dlabnav-scroll">
 			<ul class="metismenu" id="menu">
-				<li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
+				<li><a class="has-arrow " href="{{ url('/dashboard') }}" aria-expanded="false">
 					<i class="fas fa-home"></i>
 					<span class="nav-text">Dashboard</span>
 				</a>
 
 
 				</li>
+
 
 
 
@@ -257,201 +257,7 @@
 		<!--**********************************
             Content body start
         ***********************************-->
-		<div class="content-body">
-			<div class="container-fluid">
-				<div class="row page-titles">
-					<ol class="breadcrumb">
-						<li class="breadcrumb-item active"><a href="javascript:void(0)">Expert</a></li>
-						<li class="breadcrumb-item"><a href="javascript:void(0)">Settings</a></li>
-					</ol>
-				</div>
-				
-				@if (session()->has('success'))
-				<!-- Success Message -->
-				<div class="succes">
-					<div class="alert alert-success alert-dismissible fade show" role="alert">
-						<p class="err"><i class="fa-solid fa-circle-check"></i>{{ session('success') }}</p>
-					</div>
-				</div>
-				<script>
-					// Hide the success message after 5 seconds
-					setTimeout(function() {
-						$('.alert').alert('close');
-					}, 5000);
-				</script>
-				@endif
-			
-
-				<!-- row -->
-				<div class="row">
-					<div class="col-lg-12">
-						<div class="card">
-							<div class="card-body">
-								<div class="form-validation">
-									<form action="/updateexpert" method="post" class="needs-validation" novalidate>
-										@csrf
-										<div class="row">
-											<!-- Left Side with Profile Picture -->
-											<div class="col-xl-6">
-												<div class="col-xl-12 text-center mb-4">
-													<div class="profile-photo">
-														<img src="{{ asset('client/images/profile/user-2.png')}}" class="img-fluid rounded-circle" alt="">
-													</div>
-													<div class="mt-3">
-														<label for="profileImage" class="btn btn-outline-primary btn-rounded px-5">Modifier
-															<input type="file" id="profileImage" class="d-none" accept="image/*" onchange="updateProfilePicture(this)">
-														</label>
-													</div>
-												</div>
-											</div>
-											<!-- Right Side with Form Fields -->
-											<div class="col-xl-6">
-												<div class="col-xl-12">
-													<!-- nom Field -->
-													<div class="mb-3 row">
-														<label class="col-lg-4 col-form-label" for="nom">Name <span class="text-danger">*</span></label>
-														<div class="col-lg-6">
-															<input type="text" class="form-control" id="nom" name="nom" value="{{ auth()->user()->nom }}" required>
-															<div class="invalid-feedback">
-																Please enter your name.
-															</div>
-														</div>
-													</div>
-													<!-- First Name Field -->
-													<div class="mb-3 row">
-														<label class="col-lg-4 col-form-label" for="prenom">First name <span class="text-danger">*</span></label>
-														<div class="col-lg-6">
-															<input type="text" class="form-control" id="prenom" name="prenom" value="{{ auth()->user()->prenom }}" required>
-															<div class="invalid-feedback">
-																Please enter your first name.
-															</div>
-														</div>
-													</div>
-													<!-- adresse Field -->
-													<div class="mb-3 row">
-														<label class="col-lg-4 col-form-label" for="adresse">adresse <span class="text-danger">*</span></label>
-														<div class="col-lg-6">
-															<input type="text" class="form-control" id="adresse" name="adresse" value="{{ auth()->user()->adresse }}" required>
-															<div class="invalid-feedback">
-																Please enter your adresse.
-															</div>
-														</div>
-													</div>
-													<!-- Phone Number Field -->
-													<div class="mb-3 row">
-														<label class="col-lg-4 col-form-label" for="telephone">Phone number <span class="text-danger">*</span></label>
-														<div class="col-lg-6">
-															<input type="text" class="form-control" id="telephone" name="telephone" value="{{ auth()->user()->telephone }}" placeholder="06 12 34 56 78" required>
-															<div class="invalid-feedback">
-																Please enter your phone number.
-															</div>
-														</div>
-													</div>
-													<!-- Email Field -->
-													<div class="mb-3 row">
-														<label class="col-lg-4 col-form-label" for="email">Email <span class="text-danger">*</span></label>
-														<div class="col-lg-6">
-															<input type="email" class="form-control" id="email" name="email" value="{{ auth()->user()->email }}" placeholder="example@email.com" required>
-															<div class="invalid-feedback">
-																Please enter a valid email address.
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-		
-										<!-- Submit Button Row -->
-										<div class="row mt-4">
-											<div class="col-12 text-center">
-												<button type="submit" class="btn btn-primary btn-lg">Submit</button>
-											</div>
-										</div>
-									</form>
-								</div>
-							</div>
-						</div>
-					</div>
-		
-					<div class="col-lg-12">
-						<div class="card">
-							<div class="card-header">
-								<h4 class="card-title">update password</h4>
-							</div>
-							<div class="card-body">
-								<div class="basic-form">
-									<form action="/updateLogin" method="post" class="form-valide-with-icon needs-validation">
-										@csrf
-										<div class="mb-3">
-											<label class="text-label form-label" for="password">Password *</label>
-											<div class="input-group transparent-append">
-												<span class="input-group-text"> <i class="fa fa-lock"></i> </span>
-												<input type="password" class="form-control" id="password" name="password" placeholder="Choose a safe one.." required>
-												<span class="input-group-text show-pass"> 
-													<i class="fa fa-eye-slash"></i>
-													<i class="fa fa-eye"></i>
-												</span>
-												<div class="invalid-feedback">
-													Please enter a password.
-												</div>
-											</div>
-										</div>
-										<div class="mb-3">
-											<label class="text-label form-label" for="password_confirmation">Repeat Password *</label>
-											<div class="input-group transparent-append">
-												<span class="input-group-text"> <i class="fa fa-lock"></i> </span>
-												<input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Repeat your password.." required>
-												<span class="input-group-text show-pass"> 
-													<i class="fa fa-eye-slash"></i>
-													<i class="fa fa-eye"></i>
-												</span>
-												<div class="invalid-feedback">
-													Repeat your password.
-												</div>
-											</div>
-										</div>
-										<div class="mb-3">
-											<div class="form-check">
-												<input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
-												<label class="form-check-label" for="invalidCheck2">
-													Check me out
-												</label>
-											</div>
-										</div>
-										<button type="submit" class="btn me-2 btn-primary">Submit</button>
-										<button type="button" class="btn btn-light">Cancel</button>
-									</form>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-        <!--**********************************
-            Content body end
-        ***********************************-->
-
-
-        <!--**********************************
-            Footer start
-        ***********************************-->
-        <div class="footer">
-            <div class="copyright">
-                <p>Copyright © Designed &amp; Developed by <a href="../index.htm" target="_blank">DexignLab</a> 2021</p>
-            </div>
-        </div>
-		<script>
-			function updateProfilePicture(input) {
-				if (input.files && input.files[0]) {
-					var reader = new FileReader();
-					reader.onload = function(e) {
-						$('.profile-photo img').attr('src', e.target.result);
-					}
-					reader.readAsDataURL(input.files[0]);
-				}
-			}
-		</script>
+        
         <!--**********************************
             Content body end
         ***********************************-->
@@ -510,7 +316,7 @@
 <script src="{{ asset('expert/js/dlabnav-init.js')}}"></script>
 <script src="{{ asset('expert/js/demo.js')}}"></script>
 <script src="{{ asset('expert/js/styleSwitcher.js')}}"></script>
-	<script>
+		<script>
 		function cardsCenter()
 		{
 
