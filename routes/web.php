@@ -6,7 +6,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\AccueilController;
 use App\Http\Controllers\DemandeController;
+use App\Http\Controllers\EmailController;
 use App\Http\Controllers\PartenaireController;
+use App\Http\Controllers\PaymentController;
+use App\Models\Payment;
 
 /*
 |--------------------------------------------------------------------------
@@ -68,6 +71,7 @@ Route::get('/client/settings', function () {
 });
 
 
+
 Route::get('/index' , [AccueilController::class, 'indexpage']);
 Route::get('/login' , [AccueilController::class, 'loginpage']);
 Route::get('/register' , [AccueilController::class, 'registerpage']);
@@ -91,3 +95,16 @@ Route::post('/registerpartenaire' , [UsersController::class, 'registerExpert']);
 Route::post('/registerclient' , [UsersController::class, 'registerClient']);
 Route::post('/con' , [UsersController::class, 'login'])->name('connexion');
 Route::post('/updateexpert' , [PartenaireController::class, 'updateexpert']);
+
+
+//route pour email
+Route::get('/sendemail', [EmailController::class, 'sendEmail']);
+// Route::post('/pay',[PaymentController::class, 'pay'])->name('payment');
+
+Route::get('/payment','\App\Http\Controllers\PaymentController@index');
+Route::get('/create/{amount}','\App\Http\Controllers\PaymentController@create');
+Route::post('/complete','\App\Http\Controllers\PaymentController@complete');
+
+// Route::get('/payment', function () {
+//     return view('Payment.payment');
+//  });
